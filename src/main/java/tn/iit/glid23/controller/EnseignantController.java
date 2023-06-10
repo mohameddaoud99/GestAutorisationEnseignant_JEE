@@ -79,6 +79,8 @@ public class EnseignantController extends HttpServlet {
 		        request.setAttribute("listEns", ListeEnseignants);
 		        RequestDispatcher dispatcher = request.getRequestDispatcher("liste-enseignants.jsp");
 		        dispatcher.forward(request, response);
+		        
+		        
 		    }
 
 		    private void AddEnseignantPage(HttpServletRequest request, HttpServletResponse response)
