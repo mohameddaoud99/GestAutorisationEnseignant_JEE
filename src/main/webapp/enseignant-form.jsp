@@ -1,9 +1,14 @@
-<%@page import="java.util.List"%>
-<%@page import="tn.iit.glid23.model.Utilisateur"%>
+<%@page import="tn.iit.glid23.cnx.EnseignantDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
+<%@page import="java.util.List"%>
+<%@page import="tn.iit.glid23.model.Enseignant"%>
 <!DOCTYPE html>
 <html>
+<head>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
@@ -29,7 +34,176 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	integrity="sha384-pzjwEgb7dDROfBM9fSHARuoP4z7MU6vFK8i/hf5B0tnF8fkudVO5+oKd3n0n2YLs"
 	crossorigin="anonymous">
-<style>
+
+</head>
+</head>
+<body>
+
+<% List<Enseignant> listEseignants = (List<Enseignant>) application.getAttribute("tabEseignants"); %>
+	
+ 
+
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarCollapse" aria-controls="navbarCollapse"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto sidenav" id="navAccordion">
+				<li class="nav-item active"><a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
+				</li>
+				<li class="nav-item"><a class="nav-link" href="liste-enseignants.jsp">Gestion des enseignants</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Gestion des autorisations</a></li>
+				
+			
+				
+				
+				
+				<!--
+				
+				<li class="nav-item"><a class="nav-link nav-link-collapse"
+					href="#" id="hasSubItems" data-toggle="collapse"
+					data-target="#collapseSubItems2" aria-controls="collapseSubItems2"
+					aria-expanded="false">Item 2</a>
+					<ul class="nav-second-level collapse" id="collapseSubItems2"
+						data-parent="#navAccordion">
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								class="nav-link-text">Item 2.1</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								class="nav-link-text">Item 2.2</span>
+						</a></li>  
+					</ul></li>-->
+				
+			</ul>
+			<div class="form-inline ml-auto mt-2 mt-md-0">
+				<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">Deconnexion</i></a>
+
+			</div>
+		</div>
+	</nav>
+
+	<main class="content-wrapper">
+		<div class="container-fluid">
+			<div id="main">
+
+
+				<div class="w3-top">
+					<div class="w3-bar w3-card" style="background-color: #3b8724">
+
+						<a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
+						<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">d�connexion</i></a>
+
+					</div>
+				</div>
+				 <br>
+
+
+		
+
+
+	<div class="container">
+
+
+
+
+		<div class="card">
+			<h5 class="card-header" style="display: flex;justify-content: center">Ajouter Enseignant &nbsp; <span style="font-weight: bold;"> </span></h5>
+			<div class="card-body" >
+
+
+
+				<form method="post" action="EnseignantController">
+
+
+					<div class="form-group">
+						<label for="nom">Nom:</label> <input type="text"
+							class="form-control" id="nom" required placeholder="Enter nom" name="nom"
+							>
+					</div>
+
+					<div class="form-group">
+						<label for="prenom">Prenom:</label> <input type="text"
+							class="form-control" id="prenom" required placeholder="Enter prenom"
+							name="prenom" >
+					</div>
+
+					<div class="form-group">
+						<label for="email">Email:</label> <input type="email"
+							class="form-control" id="email" required placeholder="Enter email"
+							name="email" >
+					</div>
+
+					<div class="form-group">
+						<label for="pwd">Password:</label> <input class="form-control"
+							id="pwd" placeholder="Enter password" required name="password"
+							>
+					</div>
+
+
+					<button type="submit" class="btn btn-primary">Ajouter</button>
+				</form>
+			</div>
+		</div>
+	</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="text-center">
+				<span>Coded by <a href="https://si-dev.com/ru">SI-Dev</a>,
+					2018
+				</span>
+			</div>
+		</div>
+	</footer>
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <style>
 body {
 	font-family: "Lato", sans-serif;
 }
@@ -126,166 +300,5 @@ body {
 	}
 }
 </style>
-</head>
-<body>
-	<%
-	Utilisateur current = (Utilisateur) session.getAttribute("currentUser");
-	List<Utilisateur> listUser = (List<Utilisateur>) application.getAttribute("tabUser");
-	%>
-
-
-
-
-	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarCollapse" aria-controls="navbarCollapse"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarCollapse">
-			<ul class="navbar-nav mr-auto sidenav" id="navAccordion">
-				<li class="nav-item active"><a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
-				</li>
-				<li class="nav-item"><a class="nav-link" href="liste-enseignants.jsp">Gestion des enseignants</a></li>
-				<li class="nav-item"><a class="nav-link" href="liste-autorisations.jsp">Gestion des autorisations</a></li>
-				
-			
-				
-				
-				
-				<!--
-				
-				<li class="nav-item"><a class="nav-link nav-link-collapse"
-					href="#" id="hasSubItems" data-toggle="collapse"
-					data-target="#collapseSubItems2" aria-controls="collapseSubItems2"
-					aria-expanded="false">Item 2</a>
-					<ul class="nav-second-level collapse" id="collapseSubItems2"
-						data-parent="#navAccordion">
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								class="nav-link-text">Item 2.1</span>
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"> <span
-								class="nav-link-text">Item 2.2</span>
-						</a></li>  
-					</ul></li>-->
-				
-			</ul>
-			<div class="form-inline ml-auto mt-2 mt-md-0">
-				<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">Deconnexion</i></a>
-
-			</div>
-		</div>
-	</nav>
-
-	<main class="content-wrapper">
-		<div class="container-fluid">
-			<div id="main">
-
-
-				<div class="w3-top">
-					<div class="w3-bar w3-card" style="background-color: #3b8724">
-
-						<a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
-						<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">déconnexion</i></a>
-
-					</div>
-				</div>
-				 <br>
-
-
-				<div class="container-fluid">
-					<div
-						style="height: 150px; display: flex; justify-content: center; background-color: #d4d4d4"
-						; padding:10px>
-						<div class="container">
-							<h1 class="display-4">
-								Bienvenu cher administrateur: <span style="font-weight: bold" ;color:blue><%=current.getNom() + " " + current.getPrenom()%></span>
-							</h1>
-							<i class="fa-solid fa-xmark-large fa-lg" style="color: #ffffff;"></i>
-							<p class="lead">à l'application de gestion des
-								enseignants</p>
-						</div>
-					</div>
-
-					<br> <br>
-
-					<div class="row">
-						<div class="col-4">
-							<div class="jumbotron jumbotron-fluid">
-								<div class="container">
-									<h2 class="display-6">Votre Profil :</h2>
-									<p class="lead">
-										Nom:
-										<%=current.getNom()%></p>
-									<p class="lead">
-										Prénom:
-										<%=current.getPrenom()%></p>
-									<p class="lead">
-										Login:
-										<%=current.getEmail()%></p>
-									<p class="lead">
-										Mot de passe:
-										<%=current.getMdp()%></p>
-
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
-
-	<footer class="footer">
-		<div class="container">
-			<div class="text-center">
-				<span>Coded by <a href="https://si-dev.com/ru">SI-Dev</a>,
-					2018
-				</span>
-			</div>
-		</div>
-	</footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<script>
-	$(document).ready(function() {
-		  $('.nav-link-collapse').on('click', function() {
-		    $('.nav-link-collapse').not(this).removeClass('nav-link-show');
-		    $(this).toggleClass('nav-link-show');
-		  });
-		});
-
-</script>
-
-
-
-
-
 </body>
 </html>
-
-
-
-
-
-

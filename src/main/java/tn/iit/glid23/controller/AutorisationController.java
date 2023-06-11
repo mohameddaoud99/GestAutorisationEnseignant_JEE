@@ -1,29 +1,36 @@
 package tn.iit.glid23.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tn.iit.glid23.cnx.EnseignantDAO;
-import tn.iit.glid23.cnx.UtilisateurDB;
+import com.mysql.jdbc.Statement;
+
+import tn.iit.glid23.cnx.AutorisationDAO;
+import tn.iit.glid23.cnx.DBConnexion;
+import tn.iit.glid23.model.Autorisation;
 
 /**
- * Servlet implementation class DeleteEnseignantController
+ * Servlet implementation class AutorisationController
  */
-@WebServlet("/DeleteEnseignantController")
-public class DeleteEnseignantController extends HttpServlet {
+@WebServlet("/AutorisationController")
+public class AutorisationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteEnseignantController() {
+    public AutorisationController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +39,15 @@ public class DeleteEnseignantController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pos = Integer.parseInt(request.getParameter("id"));
-		ServletContext application = getServletContext();
+	     
 		
-		EnseignantDAO.deleteEnseignant(pos);
-		/*List<Utilisateur> listUser = (List<Utilisateur>) application.getAttribute("tabUser");
-		listUser.remove(pos);
-		*/
-		application.setAttribute("tabEseignants", EnseignantDAO.listEseignants());
-		response.sendRedirect("liste-enseignants.jsp");
-		
+	        
+	        // Transmettre les utilisateurs à la page JSP
+	        request.setAttribute("utilisateurs", AutorisationDAO.listAutorisation());
+	        request.getRequestDispatcher("liste-autorisations.jsp").forward(request, response);
+	        
+	        
+	    
 	}
 
 	/**
