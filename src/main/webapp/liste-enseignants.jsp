@@ -9,16 +9,6 @@
 <html>
 <head>
 <head>
-<style>
-body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
-@media print {
-    
-    button,a,.w3-top,#btn {
-        display: none;
-    }
-}
-</style>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -48,9 +38,11 @@ body {font-family: "Lato", sans-serif}
 </head>
 <body>
 
-<% List<Enseignant> listEseignants = (List<Enseignant>) application.getAttribute("tabEseignants"); %>
-	
- 
+	<%
+	List<Enseignant> listEseignants = (List<Enseignant>) application.getAttribute("tabEseignants");
+	%>
+
+
 
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -61,15 +53,35 @@ body {font-family: "Lato", sans-serif}
 
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav mr-auto sidenav" id="navAccordion">
-				<li class="nav-item active"><a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
-				</li>
+				<li class="nav-item"><a class="nav-link" href="index.jsp">Acceuil</a></li>
 				<li class="nav-item"><a class="nav-link" href="liste-enseignants.jsp">Gestion des enseignants</a></li>
-				<li class="nav-item"><a class="nav-link" href="liste-autorisations.jsp">Gestion des autorisations</a></li>
+				<li class="nav-item"><a class="nav-link" href="autorisation.jsp">Gestion des autorisations</a></li>
+				<li class="nav-item"><a class="nav-link" href="liste-autorisations.jsp">Liste des autorisations</a></li>
+
+
+
+
+
+				<!--
 				
-			
+				<li class="nav-item"><a class="nav-link nav-link-collapse"
+					href="#" id="hasSubItems" data-toggle="collapse"
+					data-target="#collapseSubItems2" aria-controls="collapseSubItems2"
+					aria-expanded="false">Item 2</a>
+					<ul class="nav-second-level collapse" id="collapseSubItems2"
+						data-parent="#navAccordion">
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								class="nav-link-text">Item 2.1</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								class="nav-link-text">Item 2.2</span>
+						</a></li>  
+					</ul></li>-->
+
 			</ul>
 			<div class="form-inline ml-auto mt-2 mt-md-0">
-				<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">Deconnexion</i></a>
+				<a href="auth.jsp" style="color: #fff"
+					class="w3-padding-large w3-hover-red w3-hide-small w3-right">Déconnexion</i></a>
 
 			</div>
 		</div>
@@ -83,68 +95,78 @@ body {font-family: "Lato", sans-serif}
 				<div class="w3-top">
 					<div class="w3-bar w3-card" style="background-color: #3b8724">
 
-						<a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
-						<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">d�connexion</i></a>
+						<a href="index.jsp" style="color: #fff"
+							class="w3-bar-item w3-button w3-padding-large">Acceuil</a> <a
+							href="auth.jsp" style="color: #fff"
+							class="w3-padding-large w3-hover-red w3-hide-small w3-right">déconnexion</i></a>
 
 					</div>
 				</div>
-				 <br>
+				<br>
 
 
 				<div class="container-fluid">
-					
+
 					<div class="row">
-                <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+						<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+						
+						<br>
+						<div id="alertContainer" class="alert alert-primary"
+							style="display: none;" role="alert">Endeignant supprimé avec succée</div>
 
-                <div class="container">
-                    <h3 class="text-center">Liste des enseignants</h3>
-                    <hr>
-			<div class="container text-left">
-<button type="button" onclick='window.print()'id="btn" class="btn btn-secondary">Imprimer</button>
+						<br>
+						
+						
+						<div class="container">
+							<h3 class="text-center">Liste des enseignants</h3>
+							<hr>
+							<div class="container text-left">
+								<button type="button" onclick='window.print()' id="btn"
+									class="btn btn-secondary">Imprimer</button>
 
-				<a href="enseignant-form.jsp" id="btn" class="btn btn-success">Add New User</a>
-			</div>
-			<br>
-                <!--  -->    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                               
-                                <th>Nom</th>
-                                <th>Prenom</th>
-                                <th>Email</th>
-                                <th>Passwords</th>
-                                <th id="btn">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--   for (Todo todo: todos) {  -->
-                            <c:forEach var="ens" items="${tabEseignants}">
+								<a href="enseignant-form.jsp" class="btn btn-success">Ajouter
+									enseignant</a>
+							</div>
+							<br>
+							<table class="table table-bordered">
+								<thead>
+									<tr>
 
-                                <tr>
-                                    
-                                    <td>
-                                        <c:out value="${ens.nom}" />
-                                    </td>
-                                     <td>
-                                        <c:out value="${ens.prenom}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${ens.email}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${ens.password}" />
-                                    </td>
-                                    <td id="btn"><a href="edit-enseignant.jsp?id=<c:out value='${ens.id}' />"><i class="fa fa-pencil" style='font-size:25px;color:orange'></i>
-                                    </a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="DeleteEnseignantController?id=<c:out value='${ens.id}' />"><i class='fas fa-trash' style='font-size:20px;color:red'></a></td>
-                                </tr>
-                            </c:forEach>
-                        
-                        </tbody>
+										<th>Nom</th>
+										<th>Prenom</th>
+										<th>Email</th>
+										<th>Passwords</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!--   for (Todo todo: todos) {  -->
+									<c:forEach var="ens" items="${tabEseignants}">
 
-                    </table>
-                </div>
-            </div>
-					
+										<tr>
+
+											<td><c:out value="${ens.nom}" /></td>
+											<td><c:out value="${ens.prenom}" /></td>
+											<td><c:out value="${ens.email}" /></td>
+											<td><c:out value="${ens.password}" /></td>
+											<td><a
+												href="edit-enseignant.jsp?id=<c:out value='${ens.id}' />"><i
+													class="fa fa-pencil" style='font-size: 25px; color: orange'></i>
+											</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+											<a
+												href="DeleteEnseignantController?id=<c:out value='${ens.id}' />"><i
+													class="fa fa-trash" aria-hidden="true" style='font-size: 20px; color: red'></i></a>
+
+											</td>
+										</tr>
+									</c:forEach>
+									<!-- } -->
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -153,8 +175,7 @@ body {font-family: "Lato", sans-serif}
 	<footer class="footer">
 		<div class="container">
 			<div class="text-center">
-				<span>Coded by <a href="https://si-dev.com/ru">SI-Dev</a>,
-					2018
+				<span>developpe par Amina & Mohamed
 				</span>
 			</div>
 		</div>
@@ -163,45 +184,48 @@ body {font-family: "Lato", sans-serif}
 
 
 
+	<script>
+		$(document).ready(function() {
+			// Show the alert
+			$("#showAlertBtn").click(function() {
+				$("#alertContainer").show();
+
+				// Hide the alert after 3 seconds
+				setTimeout(function() {
+					$("#alertContainer").hide();
+				}, 3000);
+			});
+
+		});
+	</script>
 
 
 
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<style>
 body {
 	font-family: "Lato", sans-serif;
 }

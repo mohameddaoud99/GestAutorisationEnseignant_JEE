@@ -145,10 +145,13 @@ body {
 
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav mr-auto sidenav" id="navAccordion">
-				<li class="nav-item active"><a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
-				</li>
+				<li class="nav-item"><a class="nav-link" href="index.jsp">Acceuil</a></li>
 				<li class="nav-item"><a class="nav-link" href="liste-enseignants.jsp">Gestion des enseignants</a></li>
-				<li class="nav-item"><a class="nav-link" href="liste-autorisations.jsp">Gestion des autorisations</a></li>
+				<li class="nav-item"><a class="nav-link" href="AutorisationController">Gestion des autorisations</a></li>
+				<li class="nav-item"><a class="nav-link" href="liste-autorisations.jsp">Liste des autorisations</a></li>
+				
+				
+				
 				
 			
 				
@@ -187,7 +190,7 @@ body {
 					<div class="w3-bar w3-card" style="background-color: #3b8724">
 
 						<a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
-						<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">dÃ©connexion</i></a>
+						<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">déconnexion</i></a>
 
 					</div>
 				</div>
@@ -203,7 +206,7 @@ body {
 								Bienvenu cher administrateur: <span style="font-weight: bold" ;color:blue><%=current.getNom() + " " + current.getPrenom()%></span>
 							</h1>
 							<i class="fa-solid fa-xmark-large fa-lg" style="color: #ffffff;"></i>
-							<p class="lead">Ã  l'application de gestion des
+							<p class="lead">à l'application de gestion des
 								enseignants</p>
 						</div>
 					</div>
@@ -219,7 +222,7 @@ body {
 										Nom:
 										<%=current.getNom()%></p>
 									<p class="lead">
-										PrÃ©nom:
+										Prénom:
 										<%=current.getPrenom()%></p>
 									<p class="lead">
 										Login:
@@ -241,8 +244,7 @@ body {
 	<footer class="footer">
 		<div class="container">
 			<div class="text-center">
-				<span>Coded by <a href="https://si-dev.com/ru">SI-Dev</a>,
-					2018
+				<span>developpe par Amina & Mohamed
 				</span>
 			</div>
 		</div>

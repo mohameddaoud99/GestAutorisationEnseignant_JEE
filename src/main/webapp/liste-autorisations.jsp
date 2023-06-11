@@ -1,26 +1,15 @@
+<%@page import="tn.iit.glid23.model.Autorisation"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <%@page import="java.util.List"%>
-<%@page import="tn.iit.glid23.model.Autorisation"%>
-
 <%@page import="tn.iit.glid23.model.Enseignant"%>
 <!DOCTYPE html>
 <html>
 <head>
 <head>
-<style>
-body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
-@media print {
-    
-    button,a,.w3-top,#btn {
-        display: none;
-    }
-}
-</style>
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -50,7 +39,7 @@ body {font-family: "Lato", sans-serif}
 </head>
 <body>
 
-<% List<Autorisation> listAutorisations = (List<Autorisation>) application.getAttribute("tabAutorisation"); %>
+<% List<Autorisation> listAutorisations = (List<Autorisation>) application.getAttribute("tabAutorisations"); %>
 	
  
 
@@ -63,12 +52,30 @@ body {font-family: "Lato", sans-serif}
 
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav mr-auto sidenav" id="navAccordion">
-				<li class="nav-item active"><a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
-				</li>
+				<li class="nav-item"><a class="nav-link" href="index.jsp">Acceuil</a></li>
 				<li class="nav-item"><a class="nav-link" href="liste-enseignants.jsp">Gestion des enseignants</a></li>
-				<li class="nav-item"><a class="nav-link" href="liste-autorisations.jsp">Gestion des autorisations</a></li>
-				
+				<li class="nav-item"><a class="nav-link" href="autorisation.jsp">Gestion des autorisations</a></li>
+				<li class="nav-item"><a class="nav-link" href="liste-autorisations.jsp">Liste des autorisations</a></li>
 			
+				
+				
+				
+				<!--
+				
+				<li class="nav-item"><a class="nav-link nav-link-collapse"
+					href="#" id="hasSubItems" data-toggle="collapse"
+					data-target="#collapseSubItems2" aria-controls="collapseSubItems2"
+					aria-expanded="false">Item 2</a>
+					<ul class="nav-second-level collapse" id="collapseSubItems2"
+						data-parent="#navAccordion">
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								class="nav-link-text">Item 2.1</span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="#"> <span
+								class="nav-link-text">Item 2.2</span>
+						</a></li>  
+					</ul></li>-->
+				
 			</ul>
 			<div class="form-inline ml-auto mt-2 mt-md-0">
 				<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">Deconnexion</i></a>
@@ -86,7 +93,7 @@ body {font-family: "Lato", sans-serif}
 					<div class="w3-bar w3-card" style="background-color: #3b8724">
 
 						<a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
-						<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">déconnexion</i></a>
+						<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">deconnexion</i></a>
 
 					</div>
 				</div>
@@ -96,87 +103,54 @@ body {font-family: "Lato", sans-serif}
 				<div class="container-fluid">
 					
 					<div class="row">
-        
+                <!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+
                 <div class="container">
-                    <h3 class="text-center">Liste des Autorisations</h3>
+                    <h3 class="text-center">Liste des autorisations</h3>
                     <hr>
 			<div class="container text-left">
-<button type="button" onclick='window.print()'id="btn" class="btn btn-secondary">Imprimer</button>
 
-				<a href="enseignant-form.jsp" id="btn" class="btn btn-success">Ajouter Autorisation</a>
+				<a href="autorisation.jsp" class="btn btn-success">Ajouter autorisation
+					</a>
 			</div>
 			<br>
-	<!-- 
-	    
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                
                                 <th>Date</th>
-                                <th>nb_heures</th>
-                                <th>nb_semaine</th>
-                                <th>id_enseignant </th>
-                                <th id="btn">Actions</th>
+                                <th>Nombre d'heures autorisé</th>
+                                <th>Semaine actuelle</th>
+                                <th>Enseignant</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-          <%--                 
-                       <% 
-        List<Autorisation> utilisateurs = (List<Autorisation>) request.getAttribute("utilisateurs");
-        
-        for (Autorisation utilisateur : utilisateurs) { 
-        %>
-        <tr>
-         <td><%= utilisateur.getDate() %></td>
-            <td><%= utilisateur.getNb_semaine() %></td>
-           <td><%= utilisateur.getNb_semaine() %></td>
-              <td><%= utilisateur.getId_enseignant() %></td>
-        </tr>
-        <% } %>
-                 --%>         
-                        
-                        </tbody>
-
-                    </table>
-                    -->
-                   
-  <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                               
-                                <th>Date</th>
-                                <th>nb_heures</th>
-                                <th>nb_semaine</th>
-                                <th>id_enseignant </th>
-                                <th id="btn">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           
-                            <c:forEach var="ens" items="${listAutorisations}">
+                            <!--   for (Todo todo: todos) {  -->
+                            <c:forEach var="aut" items="${tabAutorisations}">
 
                                 <tr>
                                     
                                     <td>
-                                        <c:out value="${ens.date}" />
+                                        <c:out value="${aut.date}" />
                                     </td>
                                      <td>
-                                        <c:out value="${ens.nb_heures}" />
+                                        <c:out value="${aut.nb_heures}" />
                                     </td>
                                     <td>
-                                        <c:out value="${ens.nb_semaine}" />
+                                        <c:out value="${aut.nb_semaine}" />
                                     </td>
                                     <td>
-                                        <c:out value="${ens.id_enseignant }" />
+                                        <c:out value="${aut.id_enseignant }" />
                                     </td>
-                                  
+                                    <td><a href="edit-enseignant.jsp?id=<c:out value='${aut.id}' />"><i class="fa fa-pencil" style='font-size:25px;color:orange'></i>
+                                    </a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="DeleteEnseignantController?id=<c:out value='${aut.id}' />"><i class='fas fa-trash' style='font-size:20px;color:red'></a></td>
                                 </tr>
                             </c:forEach>
-                        
+                            <!-- } -->
                         </tbody>
 
                     </table>
-
                 </div>
             </div>
 					
@@ -184,14 +158,11 @@ body {font-family: "Lato", sans-serif}
 			</div>
 		</div>
 	</main>
-	
-
 
 	<footer class="footer">
 		<div class="container">
 			<div class="text-center">
-				<span>Coded by <a href="https://si-dev.com/ru">SI-Dev</a>,
-					2018
+				<span>developpe par Amina & Mohamed
 				</span>
 			</div>
 		</div>
@@ -200,6 +171,11 @@ body {font-family: "Lato", sans-serif}
 
 
 
+
+
+
+
+  
   
   
   

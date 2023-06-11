@@ -52,10 +52,10 @@
 
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav mr-auto sidenav" id="navAccordion">
-				<li class="nav-item active"><a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
-				</li>
+				<li class="nav-item"><a class="nav-link" href="index.jsp">Acceuil</a></li>
 				<li class="nav-item"><a class="nav-link" href="liste-enseignants.jsp">Gestion des enseignants</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Gestion des autorisations</a></li>
+				<li class="nav-item"><a class="nav-link" href="AutorisationController">Gestion des autorisations</a></li>
+				<li class="nav-item"><a class="nav-link" href="liste-autorisations.jsp">Liste des autorisations</a></li>
 				
 			
 				
@@ -162,8 +162,8 @@
 	<footer class="footer">
 		<div class="container">
 			<div class="text-center">
-				<span>Coded by <a href="https://si-dev.com/ru">SI-Dev</a>,
-					2018
+				<span>Developpe par Amina & Mohamed
+					
 				</span>
 			</div>
 		</div>
