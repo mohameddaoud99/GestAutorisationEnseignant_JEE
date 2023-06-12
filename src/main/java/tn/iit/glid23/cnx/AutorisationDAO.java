@@ -19,7 +19,8 @@ public class AutorisationDAO {
 		Connection conn= DBConnexion.getConnection();
 		try {
 		
-		PreparedStatement ps = conn.prepareStatement(" select * from autorisation");
+			// SELECT a.*, e.nom,e.prenom FROM autorisation a , enseignant e  where a.id_enseignant=e.id;
+		PreparedStatement ps = conn.prepareStatement(" SELECT a.*, e.nom,e.prenom FROM autorisation a , enseignant e  where a.id_enseignant=e.id");
 
 		ResultSet rs= ps.executeQuery();
 		if (rs!=null)
@@ -34,8 +35,13 @@ public class AutorisationDAO {
 		u.setId_enseignant(rs.getInt("id_enseignant"));
 		u.setNb_heures(rs.getInt("nb_heures"));
 		u.setNb_semaine(rs.getInt("nb_semaine"));
+<<<<<<< HEAD
 		u.setNb_heures_demande(rs.getInt("nb_heures_demande"));
 		
+=======
+		u.setNom(rs.getString("nom"));
+		u.setPrenom(rs.getString("prenom"));
+>>>>>>> a6eb47ec1ae9a1d0f3e0c895c3b694225878c659
 		autorisation.add(u);
 		}
 		}
