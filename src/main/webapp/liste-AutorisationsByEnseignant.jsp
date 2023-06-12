@@ -1,10 +1,11 @@
+<%@page import="tn.iit.glid23.cnx.AutorisationDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
 <%@page import="java.util.List"%>
-<%@page import="tn.iit.glid23.model.Enseignant"%>
+<%@page import="tn.iit.glid23.model.Autorisation"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,10 +39,6 @@
 </head>
 <body>
 
-	<%
-	List<Enseignant> listEseignants = (List<Enseignant>) application.getAttribute("tabEseignants");
-	%>
-
 
 
 	<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
@@ -55,13 +52,13 @@
 			<ul class="navbar-nav mr-auto sidenav" id="navAccordion">
 				<li class="nav-item"><a class="nav-link" href="index.jsp">Acceuil</a></li>
 				<li class="nav-item"><a class="nav-link" href="liste-enseignants.jsp">Gestion des enseignants</a></li>
-				<li class="nav-item"><a class="nav-link" href="autorisation.jsp">Gestion des autorisations</a></li>
+				<li class="nav-item"><a class="nav-link" href="AutorisationController">Gestion des autorisations</a></li>
 				<li class="nav-item"><a class="nav-link" href="liste-autorisations.jsp">Liste des autorisations</a></li>
-
-
-
-
-
+				
+			
+				
+				
+				
 				<!--
 				
 				<li class="nav-item"><a class="nav-link nav-link-collapse"
@@ -77,11 +74,10 @@
 								class="nav-link-text">Item 2.2</span>
 						</a></li>  
 					</ul></li>-->
-
+				
 			</ul>
 			<div class="form-inline ml-auto mt-2 mt-md-0">
-				<a href="auth.jsp" style="color: #fff"
-					class="w3-padding-large w3-hover-red w3-hide-small w3-right">Déconnexion</i></a>
+				<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">Deconnexion</i></a>
 
 			</div>
 		</div>
@@ -95,88 +91,61 @@
 				<div class="w3-top">
 					<div class="w3-bar w3-card" style="background-color: #3b8724">
 
-						<a href="index.jsp" style="color: #fff"
-							class="w3-bar-item w3-button w3-padding-large">Acceuil</a> <a
-							href="auth.jsp" style="color: #fff"
-							class="w3-padding-large w3-hover-red w3-hide-small w3-right">déconnexion</i></a>
+						<a href="index.jsp" style="color: #fff" class="w3-bar-item w3-button w3-padding-large">Acceuil</a> 
+						<a href="auth.jsp" style="color: #fff" class="w3-padding-large w3-hover-red w3-hide-small w3-right">d�connexion</i></a>
 
 					</div>
 				</div>
-				<br>
+				 <br>
 
+<%
+	int pos = Integer.parseInt(request.getParameter("id"));
+String nom = request.getParameter("nom");
+String prenom = request.getParameter("prenom");
+	System.out.print("ssssssss"+prenom);
+List<Autorisation>  u = AutorisationDAO.AutorisationsByEnseignant(pos);
 
-				<div class="container-fluid">
-
-					<div class="row">
-						<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
-						
-						<br>
-						<div id="alertContainer" class="alert alert-primary"
-							style="display: none;" role="alert">Endeignant supprimé avec succée</div>
-
-						<br>
-						
-						
-						<div class="container">
-							<h3 class="text-center">Liste des enseignants</h3>
-							<hr>
-							<div class="container text-left">
-								<button type="button" onclick='window.print()' id="btn"
+	%>
+		
+	<button type="button" onclick='window.print()' id="btn"
 									class="btn btn-secondary">Imprimer</button>
 
-								<a href="enseignant-form.jsp" class="btn btn-success">Ajouter
-									enseignant</a>
-							</div>
-							<br>
-							<table class="table table-bordered">
+	<div class="container">
+		
+			<h5 class="card-header" style="display: flex;justify-content: center">Autorisation By Enseignant  &nbsp; <span style="font-weight: bold;"></h5>
+			
+
+
+<table class="table table-bordered">
 								<thead>
 									<tr>
 
 										<th>Nom</th>
-										<th>Prenom</th>
-										<th>Email</th>
-										<th>Passwords</th>
-										<th>Actions</th>
+										
+										<th>Date</th>
+										<th>Nombre d'heures autoris�</th>
+										<th>Semaine</th>
 									</tr>
 								</thead>
 								<tbody>
-									<!--   for (Todo todo: todos) {  -->
-									<c:forEach var="ens" items="${tabEseignants}">
-
-										<tr>
-
-											<td><c:out value="${ens.nom}" /></td>
-											<td><c:out value="${ens.prenom}" /></td>
-											<td><c:out value="${ens.email}" /></td>
-											<td><c:out value="${ens.password}" /></td>
-											<td><a
-												href="edit-enseignant.jsp?id=<c:out value='${ens.id}' />"><i
-													class="fa fa-pencil" style='font-size: 25px; color: orange'></i>
-											</a> &nbsp;&nbsp;&nbsp;&nbsp; 
-											<a
-												href="DeleteEnseignantController?id=<c:out value='${ens.id}' />"><i
-													class="fa fa-trash" aria-hidden="true" style='font-size: 20px; color: red'></i></a>
-													
-													 &nbsp;&nbsp;&nbsp;&nbsp; 
-													 
-													<a href="liste-AutorisationsByEnseignant.jsp?id=${ens.id}&nom=${ens.nom}&prenom=${ens.prenom}">
-												<i
-													class="fa fa-eye" style='font-size: 25px; color: bleu'></i>
-											</a>
-
 								
-
-											</td>
-										</tr>
-									</c:forEach>
-									<!-- } -->
+								  <% for(int i=0; i<u.size();i++){%>
+								 <tr>
+								 	<td><%=u.get(i).getNom()%> &nbsp; <%=u.get(i).getPrenom()%></td>
+								 	<td><%=u.get(i).getDate()%></td>
+								   <td><%=u.get(i).getNb_heures()%></td>
+								   <td><%=u.get(i).getNb_semaine()%></td>
+								 	
+								 </tr>
+ <%} %>
 								</tbody>
 
 							</table>
-						</div>
-					</div>
+			
 
-				</div>
+			
+		
+	</div>
 			</div>
 		</div>
 	</main>
@@ -184,7 +153,8 @@
 	<footer class="footer">
 		<div class="container">
 			<div class="text-center">
-				<span>developpe par Amina & Mohamed
+				<span>Developpe par Amina & Mohamed
+					
 				</span>
 			</div>
 		</div>
@@ -193,48 +163,45 @@
 
 
 
-	<script>
-		$(document).ready(function() {
-			// Show the alert
-			$("#showAlertBtn").click(function() {
-				$("#alertContainer").show();
-
-				// Hide the alert after 3 seconds
-				setTimeout(function() {
-					$("#alertContainer").hide();
-				}, 3000);
-			});
-
-		});
-	</script>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <style>
 body {
 	font-family: "Lato", sans-serif;
 }
