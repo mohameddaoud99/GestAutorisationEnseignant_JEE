@@ -75,7 +75,8 @@ public class AutorisationController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		RequestDispatcher rdAutorisation = getServletContext().getRequestDispatcher("/autorisation.jsp");
+
 		//String id_enseignant  = request.getParameter("teacherId ");
 		//String id_enseignant  = "1";
 		int id_enseignant = Integer.parseInt(request.getParameter("teacherId"));
@@ -88,16 +89,27 @@ public class AutorisationController extends HttpServlet {
 		String nb_heures_demande = request.getParameter("nb_heures_demande");
 
 		System.out.println(id_enseignant);
-<<<<<<< HEAD
-		Autorisation newAutorisation = new Autorisation(date,Integer.parseInt(nb_semaine),Integer.parseInt(nb_heures),
-				Integer.parseInt(id_enseignant),Integer.parseInt(nb_heures_demande));
-=======
-		Autorisation newAutorisation = new Autorisation(date,Integer.parseInt(nb_semaine),Integer.parseInt(nb_heures),id_enseignant);
->>>>>>> a6eb47ec1ae9a1d0f3e0c895c3b694225878c659
-		AutorisationDAO.insertAutorisation(newAutorisation);
-		ServletContext application = getServletContext();
-        application.setAttribute("tabAutorisations", AutorisationDAO.listAutorisations());
-		response.sendRedirect("liste-autorisations.jsp");
+		
+		Autorisation newAutorisation = new Autorisation(date,Integer.parseInt(nb_semaine),Integer.parseInt(nb_heures),id_enseignant,
+				Integer.parseInt(nb_heures_demande));
+		//int nbsem =6;
+		int nbsem =AutorisationDAO.getNbHeures();
+		if (nbsem >4)
+		{
+			request.setAttribute("erreur", "Vous n'avez le droit");
+			rdAutorisation.forward(request, response);
+		}
+		else
+		{
+			AutorisationDAO.insertAutorisation(newAutorisation);
+			ServletContext application = getServletContext();
+	        application.setAttribute("tabAutorisations", AutorisationDAO.listAutorisations());
+			response.sendRedirect("liste-autorisations.jsp");
+
+		}
+		
+		
+		
 		
 		
 	}
@@ -118,6 +130,7 @@ public class AutorisationController extends HttpServlet {
 		int nb_semaine = Integer.parseInt(request.getParameter("nb_semaine"));
 		int id_enseignant  = Integer.parseInt(request.getParameter("id_enseignant "));
 		int nb_heures_demande = Integer.parseInt(request.getParameter("nb_heures_demande"));
+		
 		Autorisation newAutorisation = new Autorisation(date,nb_heures,nb_semaine,id_enseignant,nb_heures_demande);
 		AutorisationDAO.insertAutorisation(newAutorisation);
 		response.sendRedirect("list");

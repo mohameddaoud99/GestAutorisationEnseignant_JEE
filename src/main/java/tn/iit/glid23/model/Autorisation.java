@@ -9,12 +9,14 @@ public class Autorisation {
 	private int nb_heures=0;
 	private int nb_semaine=0;
 	private int id_enseignant=0;
-<<<<<<< HEAD
 	private int nb_heures_demande =0;
-=======
 	private String nom;
 	private String prenom;
 	
+	
+	
+
+
 	public String getNom() {
 		return nom;
 	}
@@ -38,7 +40,6 @@ public class Autorisation {
 
 	
 	
->>>>>>> a6eb47ec1ae9a1d0f3e0c895c3b694225878c659
 	public Autorisation() {
 		super();
 		// TODO Auto-generated constructor stub

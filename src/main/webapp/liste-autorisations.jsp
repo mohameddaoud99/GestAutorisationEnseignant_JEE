@@ -122,6 +122,7 @@
                                 <th>Nombre d'heures autorisé</th>
                                 <th>Semaine actuelle</th>
                                 <th>Enseignant</th>
+                                <th>Nombre d'heures demandés</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -143,8 +144,15 @@
                                     <td>
                                         <c:out value="${aut.nom }" />&nbsp;<c:out value="${aut.prenom }" />
                                     </td>
-                                    <td><a href="edit-enseignant.jsp?id=<c:out value='${aut.id}' />"><i class="fa fa-pencil" style='font-size:25px;color:orange'></i>
-                                    </a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="DeleteEnseignantController?id=<c:out value='${aut.id}' />"><i class='fas fa-trash' style='font-size:20px;color:red'></a></td>
+                                     <td>
+                                        <c:out value="${aut.nb_heures_demande }" />
+                                    </td>
+                                    <td>
+                                    <a
+												href="DeleteAutorisationController?id=<c:out value='${aut.id}' />"><i
+													class="fa fa-trash" aria-hidden="true"
+													style='font-size: 20px; color: red'></i></a>
+											</td>
                                 </tr>
                             </c:forEach>
                             <!-- } -->
