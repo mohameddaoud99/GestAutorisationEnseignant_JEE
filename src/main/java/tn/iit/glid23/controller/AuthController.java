@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import tn.iit.glid23.cnx.AutorisationDAO;
 import tn.iit.glid23.cnx.EnseignantDAO;
 import tn.iit.glid23.cnx.UtilisateurDB;
 import tn.iit.glid23.model.Utilisateur;
@@ -63,6 +64,12 @@ public class AuthController extends HttpServlet {
 			
 			application.setAttribute("tabEseignants", EnseignantDAO.listEseignants());
 			System.out.println(application);
+			
+			
+			application.setAttribute("tabAutorisations", AutorisationDAO.listAutorisations());
+			System.out.println(application);
+			
+			
 			session.setAttribute("currentUser", user);
 			rdIndex.forward(request, response);
 		} else {

@@ -141,7 +141,7 @@
                                         <c:out value="${aut.nb_semaine}" />
                                     </td>
                                     <td>
-                                        <c:out value="${aut.id_enseignant }" />
+                                        <c:out value="${aut.nom }" />&nbsp;<c:out value="${aut.prenom }" />
                                     </td>
                                     <td><a href="edit-enseignant.jsp?id=<c:out value='${aut.id}' />"><i class="fa fa-pencil" style='font-size:25px;color:orange'></i>
                                     </a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="DeleteEnseignantController?id=<c:out value='${aut.id}' />"><i class='fas fa-trash' style='font-size:20px;color:red'></a></td>
