@@ -9,6 +9,32 @@ public class Autorisation {
 	private int nb_heures=0;
 	private int nb_semaine=0;
 	private int id_enseignant=0;
+	private String nom;
+	private String prenom;
+	
+	public String getNom() {
+		return nom;
+	}
+
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+
+
+
+	
+	
 	public Autorisation() {
 		super();
 		// TODO Auto-generated constructor stub

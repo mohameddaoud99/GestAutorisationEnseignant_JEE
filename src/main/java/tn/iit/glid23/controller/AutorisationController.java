@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.temporal.WeekFields;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import tn.iit.glid23.cnx.AutorisationDAO;
 import tn.iit.glid23.cnx.EnseignantDAO;
 import tn.iit.glid23.model.Autorisation;
@@ -79,12 +77,16 @@ public class AutorisationController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//String id_enseignant  = request.getParameter("teacherId ");
-		String id_enseignant  = "1";
+		//String id_enseignant  = "1";
+		int id_enseignant = Integer.parseInt(request.getParameter("teacherId"));
+
+		System.out.print("ddddddddddddd"+id_enseignant);
+		
 		String date = request.getParameter("date");
 		String nb_semaine = request.getParameter("nb_semaine");
 		String nb_heures = request.getParameter("nb_heures");
 		System.out.println(id_enseignant);
-		Autorisation newAutorisation = new Autorisation(date,Integer.parseInt(nb_semaine),Integer.parseInt(nb_heures),Integer.parseInt(id_enseignant));
+		Autorisation newAutorisation = new Autorisation(date,Integer.parseInt(nb_semaine),Integer.parseInt(nb_heures),id_enseignant);
 		AutorisationDAO.insertAutorisation(newAutorisation);
 		ServletContext application = getServletContext();
         application.setAttribute("tabAutorisations", AutorisationDAO.listAutorisations());
