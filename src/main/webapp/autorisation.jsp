@@ -43,9 +43,9 @@
 	<%
 	List<Enseignant> listEseignants = (List<Enseignant>) application.getAttribute("tabEseignants");
 	LocalDate currentdate = (LocalDate) application.getAttribute("CurrentDate");
-	int currentweek = (int) application.getAttribute("CurrentWeek");
-	int remainingWeeks = (int) application.getAttribute("RemainingWeeks");
-	int nbHeureRes = (int) application.getAttribute("NbHeureRes");
+	String currentweek = (String) application.getAttribute("CurrentWeek");
+	String remainingWeeks = (String) application.getAttribute("RemainingWeeks");
+	String nbHeureRes = (String) application.getAttribute("NbHeureRes");
 	
 	/*int currentweekInt = Integer.parseInt(currentweek);
 	int remainingWeeksInt = Integer.parseInt(remainingWeeks);
@@ -143,6 +143,10 @@
 								</select>	
 								</div>
 								
+								<div class="form-group">
+								<label for="Current Date">Nombres d'heures demandé:</label> 
+								<input class="form-control"  type="number" name="nb_heures_demande" >
+								</div>	
 								
 								<div class="form-group">
 								<label for="Current Date">La date actuelle:</label> 

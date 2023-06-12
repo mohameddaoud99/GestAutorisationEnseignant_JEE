@@ -9,6 +9,9 @@ public class Autorisation {
 	private int nb_heures=0;
 	private int nb_semaine=0;
 	private int id_enseignant=0;
+<<<<<<< HEAD
+	private int nb_heures_demande =0;
+=======
 	private String nom;
 	private String prenom;
 	
@@ -35,6 +38,7 @@ public class Autorisation {
 
 	
 	
+>>>>>>> a6eb47ec1ae9a1d0f3e0c895c3b694225878c659
 	public Autorisation() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -43,25 +47,41 @@ public class Autorisation {
 	
 	
 	
-	public Autorisation(String date, int nb_heures, int nb_semaine, int id_enseignant) {
+	public Autorisation(String date, int nb_heures, int nb_semaine, int id_enseignant, int nb_heures_demande) {
 		super();
 		this.date =  date;
 		this.nb_heures = nb_heures;
 		this.nb_semaine = nb_semaine;
 		this.id_enseignant = id_enseignant;
+		this.nb_heures_demande =nb_heures_demande;
 	}
 
 
 
 
 
-	public Autorisation(int id,String date, int nb_heures, int nb_semaine, int id_enseignant) {
+	public Autorisation(int id,String date, int nb_heures, int nb_semaine, int id_enseignant,int nb_heures_demande) {
 		super();
 		this.id=id;
 		this.date = date;
 		this.nb_heures = nb_heures;
 		this.nb_semaine = nb_semaine;
 		this.id_enseignant = id_enseignant;
+		this.nb_heures_demande =nb_heures_demande;
+	}
+
+
+
+
+	public int getNb_heures_demande() {
+		return nb_heures_demande;
+	}
+
+
+
+
+	public void setNb_heures_demande(int nb_heures_demande) {
+		this.nb_heures_demande = nb_heures_demande;
 	}
 
 
