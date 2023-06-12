@@ -43,9 +43,10 @@
 	<%
 	List<Enseignant> listEseignants = (List<Enseignant>) application.getAttribute("tabEseignants");
 	LocalDate currentdate = (LocalDate) application.getAttribute("CurrentDate");
-	String currentweek = (String) application.getAttribute("CurrentWeek");
-	String remainingWeeks = (String) application.getAttribute("RemainingWeeks");
-	String nbHeureRes = (String) application.getAttribute("NbHeureRes");
+	
+	int currentweek = (int) application.getAttribute("CurrentWeek");
+	int remainingWeeks = (int) application.getAttribute("RemainingWeeks");
+	int nbHeureRes = (int) application.getAttribute("NbHeureRes");
 	
 	/*int currentweekInt = Integer.parseInt(currentweek);
 	int remainingWeeksInt = Integer.parseInt(remainingWeeks);
@@ -122,10 +123,16 @@
 
 
 		<div class="card">
-			<h5 class="card-header" style="display: flex;justify-content: center">Gérer autorisation : &nbsp; <span style="font-weight: bold;"></span></h5>
+			<h5 class="card-header" style="display: flex;justify-content: center">Ajouter Autorisation &nbsp; <span style="font-weight: bold;"></span></h5>
 			<div class="card-body" >
 
-
+<%
+						if (request.getAttribute("erreur") != null) {
+						%>
+						<p style="color: red;">Cet Enseignant atteint le nommbre d'heures maximum d'autorisations pour cette semaine </p>
+						<%
+						}
+						%>
 
 							<form method="post" action="AutorisationController" >
 
@@ -168,7 +175,7 @@
 								<input class="form-control"  type="text" name="nb_heures" value=<%=nbHeureRes %>>
 								</div>
 
-								<button type="submit">Create Authorization</button>
+								<button class="btn btn-primary" type="submit">Ajouter Autorisation</button>
 							</form>
 						</div>
 		</div>

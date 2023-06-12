@@ -12,9 +12,15 @@ public class Autorisation {
 
 	private int nb_heures_demande =0;
 
+
+
 	private String nom;
 	private String prenom;
 	
+	
+	
+
+
 	public String getNom() {
 		return nom;
 	}
@@ -36,7 +42,6 @@ public class Autorisation {
 
 
 
-	
 	
 
 	public Autorisation() {
