@@ -69,10 +69,16 @@ public class AutorisationDAO {
 		u.setId_enseignant(rs.getInt("id_enseignant"));
 		u.setNb_heures(rs.getInt("nb_heures"));
 		u.setNb_semaine(rs.getInt("nb_semaine"));
+
 		u.setNb_heures_demande(rs.getInt("nb_heures_demande"));
 		
+
 		u.setNom(rs.getString("nom"));
 		u.setPrenom(rs.getString("prenom"));
+
+
+		
+
 		autorisation.add(u);
 		}
 		}
@@ -200,35 +206,40 @@ public class AutorisationDAO {
 		
 		
 
-		public static int  getNbHeures() {
+		public static boolean  getNbHeures(int id_enseignant, int nb_heures_demande) {
 
 			
 
-			Connection conn = DBConnexion.getConnection();
-			
-			  int nbsem=6;
-				try {
+			boolean autorise = false;
+		    int nbHeuresAutoriseesParSemaine = 4; 
+		   
+		    try {
+		     
+		    	Connection conn = DBConnexion.getConnection();
+		    	
+		      PreparedStatement psw =  conn.prepareStatement("SELECT SUM(nb_heures_demande) as nbsem FROM autorisation a, enseignant e WHERE a.id_enseignant = e.id AND e.id = ? AND nb_semaine = ?");
+		      psw.setInt(1, id_enseignant);
+		      psw.setInt(2, nb_heures_demande);
 
-					
-					LocalDate currentDate = LocalDate.now();
+		      // Exécuter la requête
+		      ResultSet rs = psw.executeQuery();
 
-					int currentWeek = currentDate.get(WeekFields.ISO.weekOfWeekBasedYear());
+		      // Vérifier le résultat
+		      if (rs.next()) {
+		        int nbHeuresDejaDemandees = rs.getInt("nbsem");
+		        System.out.println("nbsem"+nbHeuresDejaDemandees);
+		        int nbHeuresTotalesDemandees = nbHeuresDejaDemandees + nb_heures_demande;
+		        System.out.println("nbHeuresTotalesDemandees"+nbHeuresTotalesDemandees);
+		        autorise = nbHeuresTotalesDemandees <= nbHeuresAutoriseesParSemaine;
+		      }
 
-			        PreparedStatement psw = conn.prepareStatement(" SELECT SUM(nb_heures_demande) as nbsem FROM autorisation where nb_semaine="+currentWeek);
+		      // Fermer les ressources
+		    } catch (SQLException e) {
+		      // Gérer les erreurs SQL
+		      e.printStackTrace();
+		    }
 
-
-					ResultSet rs= psw.executeQuery();
-
-			        
-			        
-					 nbsem= rs.getInt("nbsem");
-				
-				
-				}catch (Exception e) {
-					// TODO: handle exception
-				}
-		         
-				return nbsem;
+		    return autorise;
 				
 		}
 		
@@ -306,6 +317,11 @@ public class AutorisationDAO {
 		    
 		    return nbsem;
 		}
+
+
+	
+		
+		
 		
 
 }

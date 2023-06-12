@@ -123,7 +123,7 @@
 
 
 		<div class="card">
-			<h5 class="card-header" style="display: flex;justify-content: center">Gérer autorisation : &nbsp; <span style="font-weight: bold;"></span></h5>
+			<h5 class="card-header" style="display: flex;justify-content: center">Ajouter Autorisation &nbsp; <span style="font-weight: bold;"></span></h5>
 			<div class="card-body" >
 
 <%
@@ -175,7 +175,7 @@
 								<input class="form-control"  type="text" name="nb_heures" value=<%=nbHeureRes %>>
 								</div>
 
-								<button type="submit">Create Authorization</button>
+								<button class="btn btn-primary" type="submit">Ajouter Autorisation</button>
 							</form>
 						</div>
 		</div>
