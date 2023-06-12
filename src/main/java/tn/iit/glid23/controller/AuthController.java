@@ -69,6 +69,7 @@ public class AuthController extends HttpServlet {
 			application.setAttribute("tabAutorisations", AutorisationDAO.listAutorisations());
 			System.out.println(application);
 			
+		
 			
 			session.setAttribute("currentUser", user);
 			rdIndex.forward(request, response);
