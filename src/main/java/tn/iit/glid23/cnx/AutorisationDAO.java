@@ -35,7 +35,7 @@ public class AutorisationDAO {
 					u.setId(rs.getInt("id"));
 					u.setNom(rs.getString("nom"));
 					u.setPrenom(rs.getString("prenom"));
-					
+					u.setNb_heures_demande(rs.getInt("nb_heures_demande"));
 					}
 					}
 					ps.close();
@@ -116,6 +116,7 @@ public class AutorisationDAO {
 		u.setNb_semaine(rs.getInt("nb_semaine"));
 		u.setNom(rs.getString("nom"));
 		u.setPrenom(rs.getString("prenom"));
+		u.setNb_heures_demande(rs.getInt("nb_heures_demande"));
 		autorisation.add(u);
 		}
 		}

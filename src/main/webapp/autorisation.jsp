@@ -143,7 +143,7 @@
 									<%
 									for (int i = 0; i < listEseignants.size(); i++) {
 									%>
-									<option  value="<%=listEseignants.get(i).getId()%>"><%=listEseignants.get(i).getNom()%></option>
+									<option  value="<%=listEseignants.get(i).getId()%>"><%=listEseignants.get(i).getNom()%>&nbsp;<%=listEseignants.get(i).getPrenom()%></option>
 									<%
 									}
 									%>

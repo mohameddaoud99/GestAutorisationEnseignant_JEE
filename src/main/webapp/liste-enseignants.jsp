@@ -124,7 +124,7 @@
 								<button type="button" onclick='window.print()' id="btn"
 									class="btn btn-secondary">Imprimer</button>
 
-								<a href="enseignant-form.jsp" class="btn btn-success">Ajouter
+								<a href="enseignant-form.jsp" class="btn btn-success" id="btn">Ajouter
 									enseignant</a>
 							</div>
 							<br>
@@ -136,7 +136,7 @@
 										<th>Prenom</th>
 										<th>Email</th>
 										<th>Passwords</th>
-										<th>Actions</th>
+										<th id="btn">Actions</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -149,7 +149,7 @@
 											<td><c:out value="${ens.prenom}" /></td>
 											<td><c:out value="${ens.email}" /></td>
 											<td><c:out value="${ens.password}" /></td>
-											<td><a
+											<td id="btn"><a
 												href="edit-enseignant.jsp?id=<c:out value='${ens.id}' />"><i
 													class="fa fa-pencil" style='font-size: 25px; color: orange'></i>
 											</a> &nbsp;&nbsp;&nbsp;&nbsp; 

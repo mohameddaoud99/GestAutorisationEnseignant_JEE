@@ -125,6 +125,7 @@ List<Autorisation>  u = AutorisationDAO.AutorisationsByEnseignant(pos);
 										<th>Date</th>
 										<th>Nombre d'heures autorisé</th>
 										<th>Semaine</th>
+										<th>Nombre d'heures demandés</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -135,7 +136,7 @@ List<Autorisation>  u = AutorisationDAO.AutorisationsByEnseignant(pos);
 								 	<td><%=u.get(i).getDate()%></td>
 								   <td><%=u.get(i).getNb_heures()%></td>
 								   <td><%=u.get(i).getNb_semaine()%></td>
-								 	
+								 	 <td><%=u.get(i).getNb_heures_demande()%></td>
 								 </tr>
  <%} %>
 								</tbody>
