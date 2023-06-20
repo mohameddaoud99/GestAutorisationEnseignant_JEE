@@ -152,7 +152,7 @@
 								
 								<div class="form-group">
 								<label for="Current Date">Nombres d'heures demandé:</label> 
-								<input class="form-control"  type="number" name="nb_heures_demande" >
+								<input class="form-control" min="1" max="4"  type="number" name="nb_heures_demande" >
 								</div>	
 								
 								<div class="form-group">

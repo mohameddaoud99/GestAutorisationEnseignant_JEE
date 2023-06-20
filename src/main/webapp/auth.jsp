@@ -13,8 +13,6 @@
 		scope="session"></jsp:useBean>
 
 
-
-
 	<div id="login-box">
 		<div class="left">
 			<h1>Connexion</h1>

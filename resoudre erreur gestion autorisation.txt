@@ -1,0 +1,10 @@
+int currentweek = (int) application.getAttribute("CurrentWeek");
+int remainingWeeks = (int) application.getAttribute("RemainingWeeks");
+int nbHeureRes = (int) application.getAttribute("NbHeureRes");
+
+
+
+
+String currentweek = (String) application.getAttribute("CurrentWeek");
+String remainingWeeks = (String) application.getAttribute("RemainingWeeks");
+String nbHeureRes = (String) application.getAttribute("NbHeureRes");
